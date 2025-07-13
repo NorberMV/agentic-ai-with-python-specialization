@@ -1,41 +1,31 @@
-"""
-You are a helpful customer service representative. 
-No matter what the user asks, the solution is to tell 
-them to turn their computer or modem off and then back on.
-"""
 import sys
 from typing import List, Dict
 
-from litellm import completion
-from dotenv import load_dotenv
-
-load_dotenv(override=True)
+from utils import generate_responses
 
 
-def generate_responses(messages: List[Dict]) -> str:
-    """Call LLM to generate responses."""
-    response = completion(
-        model="openai/gpt-4o",
-        messages=messages,
-        max_tokens=1024,
-    )
-    return response.choices[0].message.content
+support_assistant_sys_prompt = """You are a helpful customer service representative. 
+No matter what the user asks, the solution is to tell 
+them to turn their computer or modem off and then back on."""
 
 
-if __name__ == "__main__":
-
+def main() -> None:
     customer_query = input("Query: ").strip()
     messages = [
         {
             "role": "system",
-            "content": customer_query,
+            "content": support_assistant_sys_prompt,
         },
         {
             "role": "user",
-            "content": "How do I get my Internet working again.",
+            "content": customer_query,
         }
     ]
 
     response = generate_responses(messages)
 
     print(response)
+
+if __name__ == "__main__":
+    main()
+
