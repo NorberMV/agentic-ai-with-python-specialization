@@ -1,7 +1,7 @@
 import sys
 from typing import List, Dict
 
-from utils import generate_responses
+from module_1.utils import generate_responses
 
 
 support_assistant_sys_prompt = """You are a helpful customer service representative. 

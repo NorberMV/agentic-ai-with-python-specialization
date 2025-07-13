@@ -1,6 +1,6 @@
 import json
 
-from utils import generate_responses
+from module_1.utils import generate_responses
 
 
 CODE_SPEC = {
